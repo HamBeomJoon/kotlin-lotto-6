@@ -10,13 +10,22 @@ class LottoController {
 
     private var winningNumbers = listOf<String>()
     private lateinit var winningAmount: String
+    private lateinit var bonusNumber: String
+
+
     fun buyLotto() {
         inputView.printInputBuyAmount()
         inputWinningAmount()
 
         outputView.printOutputBuyAmount(winningAmount)
+
         inputView.printWinningNumbers()
         inputWinningNumbers()
+
+        inputView.printBonusNumber()
+        inputBonusNumber()
+    }
+
     private fun inputWinningAmount() {
         var isValidInput = false
 
