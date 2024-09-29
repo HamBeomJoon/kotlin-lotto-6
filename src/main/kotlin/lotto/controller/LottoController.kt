@@ -31,6 +31,20 @@ class LottoController {
         }
     }
 
+    private fun inputWinningNumbers() {
+        var isValidInput = false
+
+        while (!isValidInput) {
+            try {
+                winningNumbers = Console.readLine().split(",")
+                winningNumberValidationCheck(winningNumbers)
+                isValidInput = true
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
     private fun winningAmountValidationCheck(number: String) {
         val isNumber = number.matches(NUMBER_REGEX.toRegex())
         val isDivide = number.toInt() % 1000 == 0
@@ -42,6 +56,23 @@ class LottoController {
             ("$ERROR_MESSAGE 로또 구입 금액은 1000으로 나누어 떨어져야 합니다.")
         }
     }
+
+    private fun winningNumberValidationCheck(numbers: List<String>) {
+        val isValidNumber = numbers.all { it.toInt() in 1..45 }
+        val isSixNumber = numbers.size == SIX_NUMBER
+        val isDuplicate = numbers.distinct() == numbers
+
+        require(isValidNumber) {
+            throw IllegalArgumentException("$ERROR_MESSAGE 로또 번호는 1부터 45 사이의 숫자여야 합니다.")
+        }
+        require(isSixNumber) {
+            throw IllegalArgumentException("$ERROR_MESSAGE 로또 번호는 6개의 숫자여야 합니다.")
+        }
+        require(isDuplicate) {
+            throw IllegalArgumentException("$ERROR_MESSAGE 로또 번호는 중복되지 않는 숫자여야 합니다.")
+        }
+    }
+
     companion object {
         const val ERROR_MESSAGE = "[ERROR]"
         const val SIX_NUMBER = 6
