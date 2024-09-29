@@ -16,14 +16,18 @@ class LottoController {
     fun buyLotto() {
         inputView.printInputBuyAmount()
         inputWinningAmount()
+        println()
 
         outputView.printOutputBuyAmount(winningAmount)
+        println()
 
         inputView.printWinningNumbers()
         inputWinningNumbers()
+        println()
 
         inputView.printBonusNumber()
         inputBonusNumber()
+        println()
     }
 
     private fun inputWinningAmount() {
