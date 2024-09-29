@@ -54,6 +54,20 @@ class LottoController {
         }
     }
 
+    private fun inputBonusNumber() {
+        var isValidInput = false
+
+        while (!isValidInput) {
+            try {
+                bonusNumber = Console.readLine()
+                bonusNumberValidationCheck(bonusNumber)
+                isValidInput = true
+            } catch (e: IllegalArgumentException) {
+                println(e.message)
+            }
+        }
+    }
+
     private fun winningAmountValidationCheck(number: String) {
         val isNumber = number.matches(NUMBER_REGEX.toRegex())
         val isDivide = number.toInt() % 1000 == 0
@@ -79,6 +93,18 @@ class LottoController {
         }
         require(isDuplicate) {
             throw IllegalArgumentException("$ERROR_MESSAGE 로또 번호는 중복되지 않는 숫자여야 합니다.")
+        }
+    }
+
+    private fun bonusNumberValidationCheck(number: String) {
+        val isValidNumber = number.toInt() in 1..45
+        val isNotDuplicate = !winningNumbers.contains(number)
+
+        require(isValidNumber) {
+            throw IllegalArgumentException("$ERROR_MESSAGE 보너스 번호는 1부터 45 사이의 숫자여야 합니다.")
+        }
+        require(isNotDuplicate) {
+            throw IllegalArgumentException("$ERROR_MESSAGE 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.")
         }
     }
 
