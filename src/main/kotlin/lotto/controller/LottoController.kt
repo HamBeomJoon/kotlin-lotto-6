@@ -8,12 +8,15 @@ class LottoController {
     private val inputView = InputView()
     private val outputView = OutputView()
 
+    private var winningNumbers = listOf<String>()
     private lateinit var winningAmount: String
     fun buyLotto() {
         inputView.printInputBuyAmount()
         inputWinningAmount()
 
         outputView.printOutputBuyAmount(winningAmount)
+        inputView.printWinningNumbers()
+        inputWinningNumbers()
     private fun inputWinningAmount() {
         var isValidInput = false
 
@@ -27,6 +30,7 @@ class LottoController {
             }
         }
     }
+
     private fun winningAmountValidationCheck(number: String) {
         val isNumber = number.matches(NUMBER_REGEX.toRegex())
         val isDivide = number.toInt() % 1000 == 0
