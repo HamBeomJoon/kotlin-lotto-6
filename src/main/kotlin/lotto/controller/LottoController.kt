@@ -18,7 +18,9 @@ class LottoController {
         inputWinningAmount()
         println()
 
-        outputView.printOutputBuyAmount(winningAmount)
+        val buyLottoCount = winningAmount.toInt() / LOTTO_PRICE
+        outputView.printOutputBuyAmount(buyLottoCount)
+        outputView.printBuyNumbers(buyLottoCount)
         println()
 
         inputView.printWinningNumbers()
@@ -113,6 +115,7 @@ class LottoController {
     }
 
     companion object {
+        const val LOTTO_PRICE = 1000
         const val ERROR_MESSAGE = "[ERROR]"
         const val SIX_NUMBER = 6
         const val NUMBER_REGEX = "^[0-9]+"
