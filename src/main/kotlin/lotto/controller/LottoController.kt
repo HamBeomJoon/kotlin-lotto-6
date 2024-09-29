@@ -13,6 +13,7 @@ class LottoController {
         inputView.printInputBuyAmount()
         inputWinningAmount()
 
+        outputView.printOutputBuyAmount(winningAmount)
     private fun inputWinningAmount() {
         var isValidInput = false
 
