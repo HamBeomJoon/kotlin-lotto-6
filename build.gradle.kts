@@ -20,5 +20,7 @@ java {
 tasks {
     test {
         useJUnitPlatform()
+
+        jvmArgs("-Xshare:off")
     }
 }
