@@ -37,6 +37,11 @@ class LottoController {
         val result = resultCalculator.calculate(lottoList, winningNumbers, bonusNumber)
         outputView.printResult(result)
 
+        val earnMoney = getMoneySum(result)
+        val purchaseMoney = winningAmount.toInt()
+        val profit = earnMoney - purchaseMoney
+        val ratio = (profit.toDouble() / purchaseMoney) * 100
+        outputView.printProfit(ratio)
     }
 
     private fun inputWinningAmount() {
@@ -119,6 +124,11 @@ class LottoController {
         require(isNotDuplicate) {
             throw IllegalArgumentException("$ERROR_MESSAGE 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.")
         }
+    }
+
+    private fun getMoneySum(matchNumber: MatchNumber): Int {
+        return matchNumber.fiveCount * 5000 + matchNumber.fourCount * 50000 + matchNumber.threeCount * 1000000 +
+                matchNumber.twoCount * 30000000 + matchNumber.oneCount * 2000000000
     }
 
     companion object {

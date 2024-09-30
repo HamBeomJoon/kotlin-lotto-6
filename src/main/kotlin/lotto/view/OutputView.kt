@@ -23,4 +23,5 @@ class OutputView {
         println("6개 일치 (2,000,000,000원) - ${matchNumber.oneCount}개")
     }
 
+    fun printProfit(ratio: Double) = println("총 수익률은 ${"%.1f".format(ratio)}%입니다.")
 }
