@@ -99,6 +99,11 @@ class LottoController {
             "$ERROR_MESSAGE 숫자만 입력해주세요."
         }
 
+        val isNumberOverThousand = number.toInt() >= 1000
+        require(isNumberOverThousand) {
+            "$ERROR_MESSAGE 로또 구입 금액은 1000원 이상이어야 합니다."
+        }
+
         val isDivide = number.toInt() % 1000 == 0
         require(isDivide) {
             "$ERROR_MESSAGE 로또 구입 금액은 1000으로 나누어 떨어져야 합니다."
