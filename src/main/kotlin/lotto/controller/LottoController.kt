@@ -1,10 +1,13 @@
 package lotto.controller
 
 import camp.nextstep.edu.missionutils.Console
+import lotto.model.Lotto
+import lotto.model.MatchNumber
 import lotto.view.InputView
 import lotto.view.OutputView
 
 class LottoController {
+    private val resultCalculator = ResultCalculator()
     private val inputView = InputView()
     private val outputView = OutputView()
 
@@ -30,6 +33,10 @@ class LottoController {
         inputView.printBonusNumber()
         inputBonusNumber()
         println()
+
+        val result = resultCalculator.calculate(lottoList, winningNumbers, bonusNumber)
+        outputView.printResult(result)
+
     }
 
     private fun inputWinningAmount() {
