@@ -46,8 +46,7 @@ class LottoController {
 
         val earnMoney = getMoneySum(result)
         val purchaseMoney = winningAmount.toInt()
-        val profit = earnMoney - purchaseMoney
-        val ratio = (profit.toDouble() / purchaseMoney) * 100
+        val ratio = (earnMoney.toDouble() / purchaseMoney) * 100
         outputView.printProfit(ratio)
     }
 
