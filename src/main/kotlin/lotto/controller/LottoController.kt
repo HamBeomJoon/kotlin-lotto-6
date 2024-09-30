@@ -23,7 +23,6 @@ class LottoController {
 
         val buyLottoCount = winningAmount.toInt() / LOTTO_PRICE
         outputView.printOutputBuyAmount(buyLottoCount)
-        outputView.printBuyNumbers(buyLottoCount)
         println()
 
         inputView.printWinningNumbers()
