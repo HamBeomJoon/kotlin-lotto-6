@@ -2,6 +2,7 @@ package lotto.controller
 
 import camp.nextstep.edu.missionutils.Console
 import lotto.model.Lotto
+import lotto.model.LottoGenerator
 import lotto.model.MatchNumber
 import lotto.view.InputView
 import lotto.view.OutputView
@@ -12,6 +13,7 @@ class LottoController {
     private val outputView = OutputView()
 
     private var winningNumbers = listOf<String>()
+    private var lottoList = mutableListOf<Lotto>()
     private lateinit var winningAmount: String
     private lateinit var bonusNumber: String
 
@@ -23,6 +25,12 @@ class LottoController {
 
         val buyLottoCount = winningAmount.toInt() / LOTTO_PRICE
         outputView.printOutputBuyAmount(buyLottoCount)
+
+        repeat(buyLottoCount) {
+            val lottoGenerator = LottoGenerator()
+            lottoList.add(lottoGenerator.generateLotto())
+        }
+        outputView.printBuyNumbers(lottoList)
         println()
 
         inputView.printWinningNumbers()

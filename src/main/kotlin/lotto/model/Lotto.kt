@@ -5,7 +5,7 @@ class Lotto(private val numbers: List<Int>) {
         require(numbers.size == 6)
     }
 
-    override fun toString(): String {
-        return numbers.sorted().joinToString(", ")
+    fun getNumbers(): List<Int> {
+        return numbers
     }
 }

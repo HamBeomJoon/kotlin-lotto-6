@@ -8,6 +8,11 @@ class OutputView {
         println("${count}개를 구매했습니다.")
     }
 
+    fun printBuyNumbers(lottoList: List<Lotto>) {
+        for (lotto in lottoList) {
+            println(lotto.getNumbers())
+        }
+    }
 
     fun printResult(matchNumber: MatchNumber) {
         println("당첨 통계")
