@@ -27,3 +27,7 @@
 [x] 프로그램 종료
 
 [] 테스트 코드 작성하기
+
+---
+빌드 결과
+<img width="865" alt="스크린샷 2024-09-30 오전 11 14 09" src="https://github.com/user-attachments/assets/1602689d-3933-45c7-9eda-f8f3702de623">
