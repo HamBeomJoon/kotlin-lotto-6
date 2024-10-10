@@ -15,7 +15,7 @@ class ResultCalculator {
             val matchCount = lottoNumbers.count { it in winningIntNumbers }
             val bonusCount = if (bonusNumber.toInt() in lottoNumbers) 1 else 0
             val result = MatchResult.fromCounts(matchCount, bonusCount)
-            result.updateMatchCount(matchNumber)
+            result?.updateMatchCount(matchNumber)
         }
 
         return matchNumber
@@ -52,14 +52,14 @@ enum class MatchResult(val matchCount: Int, val bonusCount: Int) {
     abstract fun updateMatchCount(matchNumber: MatchNumber)
 
     companion object {
-        fun fromCounts(matchCount: Int, bonusCount: Int): MatchResult {
+        fun fromCounts(matchCount: Int, bonusCount: Int): MatchResult? {
             return when {
                 matchCount == 3 -> THREE
                 matchCount == 4 -> FOUR
                 matchCount == 5 -> FIVE
                 matchCount == 6 && bonusCount == 1 -> SIX_WITH_BONUS
                 matchCount == 6 && bonusCount == 0 -> SIX_WITHOUT_BONUS
-                else -> throw IllegalArgumentException()
+                else -> null
             }
         }
     }
