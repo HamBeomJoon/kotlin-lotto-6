@@ -12,28 +12,54 @@ class ResultCalculator {
 
         for (lotto in lottoList) {
             val lottoNumbers = lotto.getNumbers()
-            var bonusCount = 0
             val matchCount = lottoNumbers.count { it in winningIntNumbers }
-            if (bonusNumber.toInt() in lottoNumbers) {
-                bonusCount++
-            }
-            resultCalculate(matchCount, bonusCount)
+            val bonusCount = if (bonusNumber.toInt() in lottoNumbers) 1 else 0
+            val result = MatchResult.fromCounts(matchCount, bonusCount)
+            result.updateMatchCount(matchNumber)
         }
 
         return matchNumber
     }
+}
 
-    private fun resultCalculate(matchCount: Int, bonusCount: Int) {
-        when (matchCount + bonusCount) {
-            3 -> matchNumber.fiveCount++
-            4 -> matchNumber.fourCount++
-            5 -> matchNumber.threeCount++
-            6 -> {
-                if (matchCount == 6) {
-                    matchNumber.oneCount++
-                } else {
-                    matchNumber.twoCount++
-                }
+enum class MatchResult(val matchCount: Int, val bonusCount: Int) {
+    THREE(3, 0) {
+        override fun updateMatchCount(matchNumber: MatchNumber) {
+            matchNumber.fiveCount++
+        }
+    },
+    FOUR(4, 0) {
+        override fun updateMatchCount(matchNumber: MatchNumber) {
+            matchNumber.fourCount++
+        }
+    },
+    FIVE(5, 0) {
+        override fun updateMatchCount(matchNumber: MatchNumber) {
+            matchNumber.threeCount++
+        }
+    },
+    SIX_WITH_BONUS(6, 1) {
+        override fun updateMatchCount(matchNumber: MatchNumber) {
+            matchNumber.twoCount++
+        }
+    },
+    SIX_WITHOUT_BONUS(6, 0) {
+        override fun updateMatchCount(matchNumber: MatchNumber) {
+            matchNumber.oneCount++
+        }
+    };
+
+    abstract fun updateMatchCount(matchNumber: MatchNumber)
+
+    companion object {
+        fun fromCounts(matchCount: Int, bonusCount: Int): MatchResult {
+            return when {
+                matchCount == 3 -> THREE
+                matchCount == 4 -> FOUR
+                matchCount == 5 -> FIVE
+                matchCount == 6 && bonusCount == 1 -> SIX_WITH_BONUS
+                matchCount == 6 && bonusCount == 0 -> SIX_WITHOUT_BONUS
+                else -> throw IllegalArgumentException()
             }
         }
     }
